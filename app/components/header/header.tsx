@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default async function Header() {
     return (
         <header className={styles.header}>
-            <div className='flex items-center'>
+            <div className='flex items-center mx-8'>
                 <Link href='/' className='flex items-center mr-16 translate-y-[-4px]'>
                     <Image src='/images/icons/logo-big.png' alt='Graider Logo' width={175} height={75} />
                 </Link>

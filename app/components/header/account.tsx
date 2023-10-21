@@ -19,7 +19,7 @@ export default function HeaderAccount() {
 
     function noAvatar() {
         return (
-            <div className='flex items-center'>
+            <div className='flex items-center mx-8'>
                 <Link href='/signin'>
                     <Button variant='light' className="font-semibold text-md p-[24px] mr-4 text-gray-500">Log In</Button>
                 </Link>
@@ -34,7 +34,7 @@ export default function HeaderAccount() {
 
     function avatar() {
         return (
-            <>
+            <div className='mx-8'>
                 <Dropdown placement='bottom-end'>
                     <DropdownTrigger>
                         <Avatar name={user?.name || ''} src={user?.picture || ''} icon={null} showFallback className="cursor-pointer" />
@@ -46,7 +46,7 @@ export default function HeaderAccount() {
                         }}>Sign Out</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
-            </>
+            </div>
         );
     }
 
