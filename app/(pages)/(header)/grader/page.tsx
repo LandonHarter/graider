@@ -4,8 +4,16 @@ import StageOne from "@/svg/stageone";
 import Upload from "@/svg/upload";
 import BWArtboard from "@/svg/bwartboard";
 import { useState } from "react";
-import { Button, Input, Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
-import StageTwo from "@/svg/stagetwp";
+import {
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  Textarea,
+  useDisclosure,
+} from "@nextui-org/react";
+import StageTwo from "@/svg/stagetwo";
 import Plus from "@/svg/plus";
 import { RubricRequirement } from "@/types/rubric";
 import { toast } from "sonner";
@@ -54,29 +62,59 @@ export default function GradePage() {
 
   function prompt() {
     return (
-      <></>
+      <>
+        <h1 className="text-5xl font-bold">Add your prompt.</h1>
+        <StageTwo className="mt-10 mb-10" />
+        <div className="flex flex-col p-16 items-start border border-gray-100 rounded-3xl items-center space-y-3 rounded-27 bg-white shadow-xl">
+          <Textarea
+            type='text'
+            placeholder="Essay Prompt"
+            min={0}
+            className="w-[300px] min-h-[100px] bg-grey-100"
+            variant="faded"
+            onChange={(e) => {
+              setPoints(parseInt(e.target.value));
+            }}
+          />
+          <Button
+            onPress={() => {
+              setPage((lastPage) => lastPage + 1);
+            }}
+            className="rounded-full bg-red-500 flex-col py-7 px-7 relative z-1"
+          >
+            <b className="text-white">Add Prompt</b>
+          </Button>
+        </div>
+      </>
     );
   }
 
   function rubric() {
     return (
       <>
-        <h1 className="text-5xl font-bold">Add your rubric below.</h1>
+        <h1 className="text-5xl font-bold">Add your rubric below</h1>
         <StageTwo className="mt-10" />
         <div className="w-[300px] flex flex-col items-center mt-16 mb-8">
           {rubrics.map((rubric, index) => {
             return (
-              <div key={index} className="w-full flex flex-row px-9 py-5 mb-4 justify-between items-start space-x-10 rounded-full border border-gray-300 bg-white shadow-sm">
-                <b className='w-3/5 overflow-hidden whitespace-nowrap text-ellipsis'>{rubric.requirement}</b>
+              <div
+                key={index}
+                className="w-full flex flex-row px-9 py-5 mb-4 justify-between items-start space-x-10 rounded-full border border-gray-300 bg-white shadow-sm"
+              >
+                <b className="w-3/5 overflow-hidden whitespace-nowrap text-ellipsis">
+                  {rubric.requirement}
+                </b>
                 <b>{rubric.points}</b>
               </div>
             );
           })}
-          {rubrics.length == 0 &&
-            <h1 className='w-[500px] text-center text-5xl font-semibold text-gray-500 mb-8'>No requirements defined</h1>
-          }
+          {rubrics.length == 0 && (
+            <h1 className="w-[500px] text-center text-5xl font-semibold text-gray-200 mb-8">
+              No requirements defined
+            </h1>
+          )}
         </div>
-        <div className='flex items-center'>
+        <div className="flex items-center">
           <Button
             onPress={onOpen}
             className="rounded-full bg-red-500 flex-col py-7 px-7 mr-1"
@@ -94,7 +132,8 @@ export default function GradePage() {
             }}
           >
             <div className="flex flex-row space-x-2">
-              <b className="text-white">Continue</b> <ContinueArrowSVG className={styles.continue_arrow} />
+              <b className="text-white">Continue</b>{" "}
+              <ContinueArrowSVG className={styles.continue_arrow} />
             </div>
           </Button>
         </div>
@@ -111,7 +150,7 @@ export default function GradePage() {
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
-            <ModalBody className='p-8'>
+            <ModalBody className="p-8">
               <div className="flex flex-col items-center mt-4">
                 <div className="flex flex-col items-center mb-8">
                   <h1 className="text-3xl font-medium mb-8 px-10">
