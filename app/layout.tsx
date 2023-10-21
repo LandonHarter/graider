@@ -2,6 +2,7 @@ import './globals.css';
 import { Toaster } from 'sonner';
 import UIProvider from './providers/UIProvider';
 import basicMetadata from './util/metadata';
+import { UserContextProvider } from './context/UserContext';
 
 export const metadata = basicMetadata();
 export default function RootLayout({
@@ -15,7 +16,9 @@ export default function RootLayout({
         <Toaster richColors />
 
         <UIProvider>
-          {children}
+          <UserContextProvider>
+            {children}
+          </UserContextProvider>
         </UIProvider>
       </body>
     </html>
