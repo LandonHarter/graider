@@ -13,6 +13,7 @@ export default function GradePage() {
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState<string>("Enter Car Ride");
   const [points, setPoints] = useState<number>(5);
+  const [rubrics, setRubrics] = useState({});
 
   function getPage() {
     if (page % 2 == 0) {
@@ -51,7 +52,13 @@ export default function GradePage() {
                     }}
                   />
 
-                  <Button className="bg-red-500 rounded-full py-6 px-6 " onPress={() => {setAdding(false)}}>
+                  <Button
+                    className="bg-red-500 rounded-full py-6 px-6 "
+                    onPress={() => {
+                      setAdding(false);
+                      setRubrics({ ...rubrics, name: points });
+                    }}
+                  >
                     <b className="text-white">Add Entry</b>
                   </Button>
                 </div>
@@ -89,11 +96,17 @@ export default function GradePage() {
       <>
         <h1 className="text-5xl font-bold">Add your rubric below.</h1>
         <StageTwo className="mt-10" />
+        <div className="flex flex-row space-x-2 mt-16 mb-8">
+          <div className="flex flex-row px-9 py-5 items-start space-x-10 rounded-full border border-gray-300 bg-white shadow-sm">
+            <b>Defensible Thesis</b>
+            <b>5</b>
+          </div>
+        </div>
         <Button
           onPress={() => {
             setAdding(true);
           }}
-          className="rounded-full bg-red-500 flex-col py-7 px-7 mt-8"
+          className="rounded-full bg-red-500 flex-col py-7 px-7"
         >
           <div className="flex flex-row space-x-2">
             <b className="text-white">Add Now.</b> <Plus className="w-4" />
