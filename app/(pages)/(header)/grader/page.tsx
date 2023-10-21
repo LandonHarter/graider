@@ -20,10 +20,15 @@ export default function GradePage() {
   const [rubrics, setRubrics] = useState<RubricRequirement[]>([]);
 
   function getPage() {
-    if (page % 2 == 0) {
-      return upload();
-    } else {
-      return rubric();
+    switch (page) {
+      case 0:
+        return upload();
+      case 1:
+        return prompt();
+      case 2:
+        return rubric();
+      default:
+        return <></>;
     }
   }
 
@@ -44,6 +49,12 @@ export default function GradePage() {
           </Button>
         </div>
       </>
+    );
+  }
+
+  function prompt() {
+    return (
+      <></>
     );
   }
 
