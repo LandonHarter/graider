@@ -27,7 +27,7 @@ export default function Home() {
             No hassle, one click rapid grading of assessments and homework.
           </p>
           <div className="flex flex-row gap-2 justify-content items-center mt-[4vh]">
-            <Link href={user ? '/grade' : '/signin'}>
+            <Link href={user ? '/grader' : '/signin'}>
               <Button className="flex p-7 justify-center items-center rounded-xl" color='primary'>
                 <p className="w-5/8 text-gray-100 text-center font-inter text-2xl font-bold leading-8 m-0 p-0">
                   Start Now
