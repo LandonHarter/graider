@@ -19,9 +19,9 @@ export default function SignUpForm() {
 
     async function signIn(provider: 'google' | 'microsoft') {
         try {
-            const user = await signInWithProvider(provider);
+            await signInWithProvider(provider);
             toast.success('Successfully logged in!');
-            router.push('/');
+            router.push('/grader');
         } catch (e: any) {
             toast.error(e.message);
         }
@@ -29,9 +29,9 @@ export default function SignUpForm() {
 
     async function signUp() {
         try {
-            const user = await signUpWithEmail(email, password, firstName + ' ' + lastName);
+            await signUpWithEmail(email, password, firstName + ' ' + lastName);
             toast.success('Successfully signed up!');
-            router.push('/onboarding');
+            router.push('/grader');
         } catch (e: any) {
             toast.error(e.message);
         }

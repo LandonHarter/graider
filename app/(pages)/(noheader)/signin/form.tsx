@@ -26,7 +26,7 @@ export default function SignInForm() {
             }
 
             toast.success('Successfully logged in!');
-            router.push('/');
+            router.push('/grader');
         } catch (e: any) {
             toast.error(e.message);
         }

@@ -17,7 +17,7 @@ export default function Home() {
       </div>
       <div className="w-2/3 h-auto absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <div className="relative flex flex-col justify-center items-center">
-          <HeroPic className="w-2/5 h-auto"></HeroPic>
+          <HeroPic className="w-2/5 h-auto mb-8"></HeroPic>
           <Balancer className='w-2/3'>
             <h1 className="full mb-[2vh] text-black text-center font-inter text-5xl font-bold">
               Your AI Powered Essay Grader
@@ -27,7 +27,7 @@ export default function Home() {
             No hassle, one click rapid grading of assessments and homework.
           </p>
           <div className="flex flex-row gap-2 justify-content items-center mt-[4vh]">
-            <Link href={user ? '/' : '/signin'}>
+            <Link href={user ? '/grade' : '/signin'}>
               <Button className="flex p-7 justify-center items-center rounded-xl" color='primary'>
                 <p className="w-5/8 text-gray-100 text-center font-inter text-2xl font-bold leading-8 m-0 p-0">
                   Start Now
