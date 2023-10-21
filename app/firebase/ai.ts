@@ -22,7 +22,7 @@ export async function gradeEssay(prompt: string, essay: string, rubric: RubricRe
     });
 
     const res: any = await new Promise((resolve, reject) => {
-        onSnapshot(requestRef, (doc) => {
+        const unsubscribe = onSnapshot(requestRef, (doc) => {
             const data = doc.data();
             if (!data) return;
             const status = data.status;
@@ -31,8 +31,10 @@ export async function gradeEssay(prompt: string, essay: string, rubric: RubricRe
             if (!state) return;
 
             if (state === 'COMPLETED') {
+                unsubscribe();
                 resolve(doc.data());
             } else if (state === 'ERROR') {
+                unsubscribe();
                 reject("No such document!");
             }
         });
@@ -41,7 +43,7 @@ export async function gradeEssay(prompt: string, essay: string, rubric: RubricRe
     return parseGrade(res.output);
 }
 
-function parseGrade(response: string) {
+export function parseGrade(response: string) {
     const gradeStr = response.split("|")[0];
     const grade: number = parseFloat(gradeStr.split("/")[0]);
     const maxGrade: number = parseFloat(gradeStr.split("/")[1]);
