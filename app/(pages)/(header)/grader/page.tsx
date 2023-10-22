@@ -200,7 +200,7 @@ export default function GradePage() {
                 essay = await extractText(essayImage) || '';
               }
 
-              const { id } = await gradeEssay(essayPrompt, essay, rubrics, 1);
+              const { id } = await gradeEssay(essayPrompt, essay, rubrics);
               router.push(`/results/${id}`);
             }}
           >
