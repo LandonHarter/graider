@@ -40,7 +40,10 @@ export async function gradeEssay(prompt: string, essay: string, rubric: RubricRe
         });
     });
 
-    return parseGrade(res.output);
+    return {
+        ...parseGrade(res.output),
+        id: requestRef.id
+    };
 }
 
 export function parseGrade(response: string) {

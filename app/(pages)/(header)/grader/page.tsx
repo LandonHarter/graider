@@ -19,13 +19,24 @@ import { RubricRequirement } from "@/types/rubric";
 import { toast } from "sonner";
 import ContinueArrowSVG from "@/svg/continue";
 import styles from "./page.module.scss";
+import StageThree from "@/svg/stagethree";
+import { useRouter } from "next/navigation";
+import { extractText } from "@/firebase/text";
+import { gradeEssay } from "@/firebase/ai";
 
 export default function GradePage() {
+  const router = useRouter();
+
   const [page, setPage] = useState(0);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [requirement, setRequirement] = useState<string>("");
   const [points, setPoints] = useState<number>(5);
   const [rubrics, setRubrics] = useState<RubricRequirement[]>([]);
+
+  const [essayText, setEssayText] = useState<string>("");
+  const [essayImage, setEssayImage] = useState<Blob | null>(null);
+  const [essayPrompt, setEssayPrompt] = useState<string>("");
+  const [generating, setGenerating] = useState<boolean>(false);
 
   function getPage() {
     switch (page) {
@@ -45,17 +56,22 @@ export default function GradePage() {
       <>
         <h1 className="text-5xl font-bold">Upload your Essay</h1>
         <StageOne className="mt-10" />
-        <div className="rounded-3xl border border-grey-200 border-dashed border-black flex flex-col p-16 mt-7 space-y-4 items-center">
+        <label htmlFor='essay' className="rounded-3xl border border-grey-200 border-dashed border-black flex flex-col p-16 mt-7 space-y-4 items-center cursor-pointer">
+          <input type='file' id='essay' className='hidden' onChange={(e) => {
+            if (e.target.files) {
+              setEssayImage(e.target.files[0]);
+              setPage((lastPage) => lastPage + 1);
+            }
+          }} />
+
           <Upload />
           <Button
-            onPress={() => {
-              setPage((lastPage) => lastPage + 1);
-            }}
-            className="rounded-full bg-red-500 flex-col py-7 px-7 relative z-1"
+            className="rounded-full bg-red-500 flex-col py-7 px-7 relative z-1 pointer-events-none z-[-1]"
           >
             <b className="text-white">Upload a PNG</b>
           </Button>
-        </div>
+        </label>
+        <p className='mt-2 font-medium text-lg text-gray-500'>or <u>paste essay</u></p>
       </>
     );
   }
@@ -69,11 +85,10 @@ export default function GradePage() {
           <Textarea
             type='text'
             placeholder="Essay Prompt"
-            min={0}
             className="w-[300px] min-h-[100px] bg-grey-100"
             variant="faded"
             onChange={(e) => {
-              setPoints(parseInt(e.target.value));
+              setEssayPrompt(e.target.value);
             }}
           />
           <Button
@@ -82,7 +97,7 @@ export default function GradePage() {
             }}
             className="rounded-full bg-red-500 flex-col py-7 px-7 relative z-1"
           >
-            <b className="text-white">Add Prompt</b>
+            <b className="text-white">Set Prompt</b>
           </Button>
         </div>
       </>
@@ -93,7 +108,7 @@ export default function GradePage() {
     return (
       <>
         <h1 className="text-5xl font-bold">Add your rubric below</h1>
-        <StageTwo className="mt-10" />
+        <StageThree className="mt-10" />
         <div className="w-[300px] flex flex-col items-center mt-16 mb-8">
           {rubrics.map((rubric, index) => {
             return (
@@ -130,9 +145,32 @@ export default function GradePage() {
               opacity: rubrics.length == 0 ? 0.5 : 1,
               cursor: rubrics.length == 0 ? "not-allowed" : "pointer",
             }}
+            onPress={async () => {
+              if (rubrics.length == 0) {
+                toast.error("Please add at least one rubric entry.");
+                return;
+              }
+              if (essayPrompt == "") {
+                toast.error("Please enter a prompt.");
+                return;
+              }
+              if (essayText == "" && essayImage == null) {
+                toast.error("Please upload an essay.");
+                return;
+              }
+
+              setGenerating(true);
+              let essay = essayText;
+              if (essayImage) {
+                essay = await extractText(essayImage) || '';
+              }
+
+              const { id } = await gradeEssay(essayPrompt, essay, rubrics, 1);
+              router.push(`/results/${id}`);
+            }}
           >
             <div className="flex flex-row space-x-2">
-              <b className="text-white">Continue</b>{" "}
+              <b className="text-white">Continue</b>
               <ContinueArrowSVG className={styles.continue_arrow} />
             </div>
           </Button>
@@ -143,7 +181,7 @@ export default function GradePage() {
 
   return (
     <>
-      <BWArtboard className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+      <BWArtboard className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[-1]" />
       <div className="w-full min-h-[80vh] flex flex-col items-center mt-[12.5vh]">
         {getPage()}
       </div>
