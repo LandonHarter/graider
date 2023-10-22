@@ -23,6 +23,7 @@ import StageThree from "@/svg/stagethree";
 import { useRouter } from "next/navigation";
 import { extractText } from "@/firebase/text";
 import { gradeEssay } from "@/firebase/ai";
+import Loading from "@/components/loading/loading";
 
 export default function GradePage() {
   const router = useRouter();
@@ -214,6 +215,7 @@ export default function GradePage() {
     );
   }
 
+  if (generating) <Loading />;
   return (
     <>
       <BWArtboard className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[-1]" />

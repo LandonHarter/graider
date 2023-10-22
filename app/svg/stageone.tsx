@@ -31,7 +31,7 @@ export default function StageOne({ className }: { className?: string }) {
         x2="188"
         y2="12.5"
         stroke="#A3A3A3"
-        stroke-dasharray="2 2"
+        strokeDasharray="2 2"
       />
       <circle cx="114" cy="12" r="11.5" fill="#F9F9F9" stroke="#A3A3A3" />
       <path

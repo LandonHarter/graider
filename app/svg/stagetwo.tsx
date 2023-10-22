@@ -26,7 +26,7 @@ export default function StageTwo({ className }: { className?: string }) {
         x2="188"
         y2="12.5"
         stroke="#A3A3A3"
-        stroke-dasharray="2 2"
+        strokeDasharray="2 2"
       />
       <line
         x1="28"
@@ -34,11 +34,11 @@ export default function StageTwo({ className }: { className?: string }) {
         x2="103"
         y2="12.5"
         stroke="#FF5858"
-        stroke-dasharray="2 2"
+        strokeDasharray="2 2"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M4 12C4 5.37258 9.37258 0 16 0C22.6274 0 28 5.37258 28 12C28 18.6274 22.6274 24 16 24C9.37258 24 4 18.6274 4 12ZM20.4434 9.7673C20.7398 9.35245 20.6437 8.77595 20.2288 8.47963C19.814 8.18331 19.2375 8.2794 18.9412 8.69424L14.9591 14.2691L12.9604 12.2704C12.5999 11.9099 12.0155 11.9099 11.655 12.2704C11.2945 12.6308 11.2945 13.2153 11.655 13.5758L14.4242 16.345C14.6161 16.5369 14.8826 16.6346 15.1531 16.6122C15.4235 16.5899 15.6703 16.4496 15.8281 16.2288L20.4434 9.7673Z"
         fill="#FF9999"
       />
