@@ -24,6 +24,7 @@ import { useRouter } from "next/navigation";
 import { extractText } from "@/firebase/text";
 import { gradeEssay } from "@/firebase/ai";
 import Loading from "@/components/loading/loading";
+import RequireAuth from "@/components/auth/requireauth";
 
 export default function GradePage() {
   const router = useRouter();
@@ -222,7 +223,7 @@ export default function GradePage() {
 
   if (generating) return <Loading />;
   return (
-    <>
+    <RequireAuth redirectUrl='/signin'>
       <BWArtboard className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[-1]" />
       <div className="w-full min-h-[80vh] flex flex-col items-center mt-[12.5vh]">
         {getPage()}
@@ -276,6 +277,6 @@ export default function GradePage() {
           )}
         </ModalContent>
       </Modal>
-    </>
+    </RequireAuth>
   );
 }
