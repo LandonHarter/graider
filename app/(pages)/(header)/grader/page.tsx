@@ -84,7 +84,7 @@ export default function GradePage() {
             >
               <div className="flex flex-row space-x-2">
                 <b className="text-white">Continue</b>
-                <ContinueArrowSVG className={styles.continue_arrow} />
+                <ContinueArrowSVG className={styles.continue_arrow_white} />
               </div>
             </Button>
           </> :

@@ -1,9 +1,19 @@
 .continue_arrow {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
 
     path {
         fill: rgb(75 85 99);
         stroke: rgb(75 85 99);
+    }
+}
+
+.continue_arrow_white {
+    width: 20px;
+    height: 20px;
+
+    path {
+        fill: #fff;
+        stroke: #fff;
     }
 }
