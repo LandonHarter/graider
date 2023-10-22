@@ -65,7 +65,7 @@ export default function GradePage() {
       <>
         <h1 className="text-5xl font-bold">Add your prompt.</h1>
         <StageTwo className="mt-10 mb-10" />
-        <div className="flex flex-col p-16 items-start border border-gray-100 rounded-3xl items-center space-y-3 rounded-27 bg-white shadow-xl">
+        <div className="flex flex-col p-16 border border-gray-100 rounded-3xl items-center space-y-3 rounded-27 bg-white shadow-xl">
           <Textarea
             type='text'
             placeholder="Essay Prompt"
@@ -109,7 +109,7 @@ export default function GradePage() {
             );
           })}
           {rubrics.length == 0 && (
-            <h1 className="w-[500px] text-center text-5xl font-semibold text-gray-200 mb-8">
+            <h1 className="w-[500px] text-center text-5xl font-semibold text-gray-400 mb-8">
               No requirements defined
             </h1>
           )}
