@@ -45,7 +45,8 @@ export default function GenerateResults() {
             }[] = [];
             parsed.rubric.split(',').map((rubric, i) => {
                 let text = rubric.split(':')[0];
-                text.replaceAll('[', '').replaceAll(']', '');
+                text = text.replaceAll('[', '');
+                text = text.replaceAll(']', '');
                 if (text.startsWith(' ')) {
                     text = text.substring(1);
                 }
