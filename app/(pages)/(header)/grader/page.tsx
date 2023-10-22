@@ -199,6 +199,11 @@ export default function GradePage() {
               let essay = essayText;
               if (essayImage) {
                 essay = await extractText(essayImage) || '';
+                if (essay == null || essay == '') {
+                  toast.error("Failed to extract text from image.");
+                  window.location.href = '/grader';
+                  return;
+                }
               }
 
               const { id } = await gradeEssay(essayPrompt, essay, rubrics);
