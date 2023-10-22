@@ -38,6 +38,8 @@ export default function GradePage() {
   const [essayPrompt, setEssayPrompt] = useState<string>("");
   const [generating, setGenerating] = useState<boolean>(false);
 
+  const [typeEssay, setTypeEssay] = useState<boolean>(false);
+
   function getPage() {
     switch (page) {
       case 0:
@@ -56,22 +58,55 @@ export default function GradePage() {
       <>
         <h1 className="text-5xl font-bold">Upload your Essay</h1>
         <StageOne className="mt-10" />
-        <label htmlFor='essay' className="rounded-3xl border border-grey-200 border-dashed border-black flex flex-col p-16 mt-7 space-y-4 items-center cursor-pointer">
-          <input type='file' id='essay' className='hidden' onChange={(e) => {
-            if (e.target.files) {
-              setEssayImage(e.target.files[0]);
-              setPage((lastPage) => lastPage + 1);
-            }
-          }} />
 
-          <Upload />
-          <Button
-            className="rounded-full bg-red-500 flex-col py-7 px-7 relative z-1 pointer-events-none z-[-1]"
-          >
-            <b className="text-white">Upload a PNG</b>
-          </Button>
-        </label>
-        <p className='mt-2 font-medium text-lg text-gray-500'>or <u>paste essay</u></p>
+        {typeEssay ?
+          <>
+            <Textarea
+              type='text'
+              placeholder="Essay Text"
+              className="w-[700px] h-fit bg-grey-100 mt-8"
+              minRows={20}
+              maxRows={25}
+              variant="faded"
+              onChange={(e) => {
+                setEssayText(e.target.value);
+              }}
+            />
+            <Button
+              className="rounded-full bg-red-500 flex-col py-7 px-7 mt-2"
+              onPress={() => {
+                if (essayText == "") {
+                  toast.error("Please enter an essay.");
+                  return;
+                }
+                setPage((lastPage) => lastPage + 1);
+              }}
+            >
+              <div className="flex flex-row space-x-2">
+                <b className="text-white">Continue</b>
+                <ContinueArrowSVG className={styles.continue_arrow} />
+              </div>
+            </Button>
+          </> :
+          <label htmlFor='essay' className="rounded-3xl border border-grey-200 border-dashed border-black flex flex-col p-16 mt-7 space-y-4 items-center cursor-pointer">
+            <input type='file' id='essay' className='hidden' onChange={(e) => {
+              if (e.target.files) {
+                setEssayImage(e.target.files[0]);
+                setPage((lastPage) => lastPage + 1);
+              }
+            }} />
+
+            <Upload />
+            <Button
+              className="rounded-full bg-red-500 flex-col py-7 px-7 relative z-1 pointer-events-none z-[-1]"
+            >
+              <b className="text-white">Upload a PNG</b>
+            </Button>
+          </label>
+        }
+        <p className='mt-2 font-medium text-lg text-gray-500'>or <u className='cursor-pointer' onClick={() => {
+          setTypeEssay((lastType) => !lastType);
+        }}>{typeEssay ? 'upload file' : 'paste essay'}</u></p>
       </>
     );
   }

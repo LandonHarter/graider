@@ -2,7 +2,7 @@ import { RubricRequirement } from "@/types/rubric";
 import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
 import { db } from "./init";
 
-export async function gradeEssay(prompt: string, essay: string, rubric: RubricRequirement[], gradeLevel: number) {
+export async function gradeEssay(prompt: string, essay: string, rubric: RubricRequirement[]) {
     let totalPoints = 0;
     rubric.forEach((requirement) => {
         totalPoints += requirement.points;
@@ -17,7 +17,6 @@ export async function gradeEssay(prompt: string, essay: string, rubric: RubricRe
         prompt,
         essay,
         totalPoints: totalPoints.toString(),
-        gradeLevel: gradeLevel.toString(),
         rubric: rubricStr
     });
 

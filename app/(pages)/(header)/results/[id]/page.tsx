@@ -56,7 +56,7 @@ export default function Results() {
         <div className="bg-red-500 border-black flex flex-col p-16 mt-10 space-y-4 items-center" style={{ borderRadius: '4rem' }}>
           <p className="text-8xl text-white font-bold">{results.pct}%</p>
         </div>
-        <p className="text-gray-500 text-xl mt-5">download full report <Link href='/' className='underline'>here</Link></p>
+        <p className="text-gray-500 text-xl mt-5">download full report <Link href={`/generate/${id}`} target='_blank' className='underline'>here</Link></p>
       </div>
     </>
   );
