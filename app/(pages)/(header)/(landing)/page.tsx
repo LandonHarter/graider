@@ -20,21 +20,21 @@ export default function Home() {
           <HeroPic className="w-2/5 h-auto mb-8"></HeroPic>
           <Balancer className='w-2/3'>
             <h1 className="full mb-[2vh] text-black text-center font-inter text-5xl font-bold">
-              Your AI Powered Essay Grader
+              Rapid AI Essay Grading for Teachers
             </h1>
           </Balancer>
-          <p className="w-5/8 text-gray-400 text-center font-inter text-2xl font-regular leading-8">
-            No hassle, one click rapid grading of assessments and homework.
+          <p className="w-1/2 text-gray-400 text-center font-inter text-2xl font-regular leading-8">
+            No hassle, one click rapid grading of essays with rubric integration.
           </p>
-          <div className="flex flex-row gap-2 justify-content items-center mt-[4vh]">
+          <div className="flex flex-row gap-0 justify-content items-center mt-[4vh]">
             <Link href={user ? '/grader' : '/signin'}>
-              <Button className="flex p-7 justify-center items-center rounded-xl" color='primary'>
-                <p className="w-5/8 text-gray-100 text-center font-inter text-2xl font-bold leading-8 m-0 p-0">
+              <Button className="font-semibold text-md p-[24px] rounded-full text-white" color='primary'>
+                <p className="text-center font-inter leading-8 m-0 p-0">
                   Start Now
                 </p>
               </Button>
             </Link>
-            <Button className="w-5/8 text-gray-400 p-7 text-center font-inter text-2xl font-bold leading-8 bg-transparent">
+            <Button className="font-semibold text-md p-[24px] rounded-full text-gray-400 leading-8 bg-transparent">
               Learn More
             </Button>
           </div>

@@ -13,8 +13,8 @@ export default async function Header() {
                 <nav className='flex items-center'>
                     <ul className='flex flex-row items-center'>
                         <Link href='/'><li className='font-semibold text-gray-500 text-xl mx-6'>Home</li></Link>
-                        <Link href='/'><li className='font-semibold text-gray-500 text-xl mx-6'>Home</li></Link>
-                        <Link href='/'><li className='font-semibold text-gray-500 text-xl mx-6'>Home</li></Link>
+                        <Link href='/'><li className='font-semibold text-gray-500 text-xl mx-6'>About</li></Link>
+                        <Link href='/'><li className='font-semibold text-gray-500 text-xl mx-6'>Transparency</li></Link>
                     </ul>
                 </nav>
             </div>

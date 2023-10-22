@@ -159,7 +159,7 @@ export default function GradePage() {
             );
           })}
           {rubrics.length == 0 && (
-            <h1 className="w-[500px] text-center text-5xl font-semibold text-gray-400 mb-8">
+            <h1 className="w-[500px] text-center text-5xl font-semibold text-gray-300 mb-8">
               No requirements defined
             </h1>
           )}
@@ -174,7 +174,7 @@ export default function GradePage() {
             </div>
           </Button>
           <Button
-            className="rounded-full bg-red-500 flex-col py-7 px-7 ml-1"
+            className="rounded-full bg-transparent flex-col py-7 px-7 ml-1"
             disabled={rubrics.length == 0}
             style={{
               opacity: rubrics.length == 0 ? 0.5 : 1,
@@ -204,8 +204,8 @@ export default function GradePage() {
               router.push(`/results/${id}`);
             }}
           >
-            <div className="flex flex-row space-x-2">
-              <b className="text-white">Continue</b>
+            <div className="flex flex-row space-x-2 justify-center items-center">
+              <b className="text-gray-600">Continue</b>
               <ContinueArrowSVG className={styles.continue_arrow} />
             </div>
           </Button>
